@@ -8,7 +8,6 @@ import 'package:main/cubit/simple_calc_viewer_cubit.dart';
 import 'package:main/cubit/unit_converter_button_cubit.dart';
 import 'package:main/cubit/unit_converter_cubit.dart';
 import 'package:main/pages/home_page.dart';
-import 'package:main/pages/unit_converter_page.dart';
 import 'package:sizer/sizer.dart';
 
 Future<void> main() async {
