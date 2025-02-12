@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:main/bloc/get_homepage_bloc.dart';
 import 'package:main/bloc/theme_bloc.dart';
+import 'package:main/common/enums.dart';
 import 'package:main/cubit/rad_to_deg_cubit.dart';
 import 'package:main/cubit/simple_calc_viewer_cubit.dart';
+import 'package:main/cubit/unit_converter_button_cubit.dart';
+import 'package:main/cubit/unit_converter_cubit.dart';
 import 'package:main/pages/home_page.dart';
+import 'package:main/pages/unit_converter_page.dart';
 import 'package:sizer/sizer.dart';
 
 Future<void> main() async {
@@ -23,11 +27,17 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => GetHomepageBloc()),
         BlocProvider(create: (context) => SimpleCalcViewerCubit()),
         BlocProvider(create: (context) => RadToDegCubit()),
+        BlocProvider(create: (context) => UnitConverterCubit()),
+        BlocProvider(create: (context) => UnitConverterButtonCubit()),
       ],
       child: Sizer(
         builder: (context, orientation, deviceType) {
           BlocProvider.of<ThemeBloc>(context).add(InitialThemeSetEvent());
-          BlocProvider.of<GetHomepageBloc>(context).add(GetHomepage());
+          BlocProvider.of<UnitConverterCubit>(
+            context,
+          ).changeUnitType(UnitType.area);
+          BlocProvider.of<UnitConverterButtonCubit>(context).onChanged('Area');
+          //BlocProvider.of<GetHomepageBloc>(context).add(GetHomepage());
           return BlocBuilder<ThemeBloc, ThemeData>(
             builder: (context, state) {
               return MaterialApp(

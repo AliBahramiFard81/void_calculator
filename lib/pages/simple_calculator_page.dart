@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:main/common/colors.dart';
+import 'package:main/common/enums.dart';
 import 'package:main/cubit/rad_to_deg_cubit.dart';
 import 'package:main/cubit/simple_calc_viewer_cubit.dart';
 import 'package:main/services/simple_calc_service.dart';
@@ -23,7 +24,6 @@ class _SimpleCalculatorPageState extends State<SimpleCalculatorPage> {
   void initState() {
     textEditingController = TextEditingController();
     scrollController = ScrollController();
-    textEditingController.addListener(() {});
     super.initState();
   }
 

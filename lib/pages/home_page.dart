@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:main/bloc/get_homepage_bloc.dart';
 import 'package:main/common/colors.dart';
 import 'package:main/pages/simple_calculator_page.dart';
+import 'package:main/pages/unit_converter_page.dart';
 import 'package:main/widgets/common_appbar.dart';
 import 'package:main/widgets/custom_drawer.dart';
 
@@ -27,7 +28,9 @@ class HomePage extends StatelessWidget {
               child:
                   state is GetHomePageLoading
                       ? const CircularProgressIndicator()
-                      : SimpleCalculatorPage(),
+                      : state is GetHomePageSuccess
+                      ? SimpleCalculatorPage()
+                      : UnitConverterPage(),
             ),
           );
         },

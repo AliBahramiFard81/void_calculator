@@ -13,3 +13,5 @@ final class GetHomePageFailed extends GetHomepageState {
 }
 
 final class GetHomePageSuccess extends GetHomepageState {}
+
+final class GetUnitConverterPageSuccess extends GetHomepageState {}

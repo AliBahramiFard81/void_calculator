@@ -11,8 +11,12 @@ class GetHomepageBloc extends Bloc<GetHomepageEvent, GetHomepageState> {
       return emit(GetHomePageSuccess());
     });
 
-    on<GetHomePageTest>((event, emit) {
+    on<GetSimpleCalculatorPage>((event, emit) {
       return emit(GetHomePageSuccess());
+    });
+
+    on<GetUnitConverterPage>((event, emit) {
+      return emit(GetUnitConverterPageSuccess());
     });
   }
 }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:main/common/colors.dart';
+import 'package:main/common/enums.dart';
 import 'package:sizer/sizer.dart';
-
-enum ButtonType { numbers, functions, equal }
 
 class SimpleCalcButton extends StatelessWidget {
   final ButtonType buttonType;

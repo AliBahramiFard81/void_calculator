@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:main/bloc/get_homepage_bloc.dart';
 import 'package:main/bloc/theme_bloc.dart';
 import 'package:main/common/colors.dart';
 import 'package:sizer/sizer.dart';
@@ -45,6 +46,24 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          ListTile(
+            title: Text('Simple Calculator'),
+            onTap: () {
+              BlocProvider.of<GetHomepageBloc>(
+                context,
+              ).add(GetSimpleCalculatorPage());
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: Text('Unit Converter'),
+            onTap: () {
+              BlocProvider.of<GetHomepageBloc>(
+                context,
+              ).add(GetUnitConverterPage());
+              Navigator.pop(context);
+            },
           ),
         ],
       ),
