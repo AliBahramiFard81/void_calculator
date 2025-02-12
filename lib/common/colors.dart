@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final lightBackgroundColor = Color.fromRGBO(215, 217, 216, 1);
+const lightBackgroundColor = Color.fromRGBO(215, 217, 216, 1);
 const darkBackgroundColor = Color.fromRGBO(0, 0, 0, 1);
 
 const lightDisplayColor = Color.fromRGBO(196, 198, 197, 1);
