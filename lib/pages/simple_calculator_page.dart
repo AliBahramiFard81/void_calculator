@@ -22,7 +22,6 @@ class _SimpleCalculatorPageState extends State<SimpleCalculatorPage> {
   int textLength = 0;
   @override
   void initState() {
-    print('object');
     textEditingController = TextEditingController();
     scrollController = ScrollController();
     super.initState();
@@ -82,6 +81,7 @@ class _SimpleCalculatorPageState extends State<SimpleCalculatorPage> {
                     controller: textEditingController,
                     scrollController: scrollController,
                     keyboardType: TextInputType.none,
+
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       isDense: true,
@@ -105,6 +105,7 @@ class _SimpleCalculatorPageState extends State<SimpleCalculatorPage> {
                                 fontSize: 25.sp,
                                 fontFamily: 'nothing',
                               ),
+
                               state.result == 'Error' ? '' : state.result,
                             );
                           } else {

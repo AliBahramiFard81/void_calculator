@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:main/bloc/get_homepage_bloc.dart';
 import 'package:main/common/colors.dart';
+import 'package:main/common/enums.dart';
+import 'package:main/cubit/unit_converter_button_cubit.dart';
+import 'package:main/cubit/unit_converter_cubit.dart';
 import 'package:main/pages/simple_calculator_page.dart';
 import 'package:main/pages/unit_converter_page.dart';
 import 'package:main/widgets/common_appbar.dart';
@@ -14,7 +17,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final brightness = Theme.of(context).brightness;
     return BlocListener<GetHomepageBloc, GetHomepageState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        print(state);
+      },
       child: BlocBuilder<GetHomepageBloc, GetHomepageState>(
         builder: (context, state) {
           return Scaffold(
