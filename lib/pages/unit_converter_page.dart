@@ -29,12 +29,15 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
   @override
   void initState() {
     textEditingController = TextEditingController();
-    textEditingController.text = '25';
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final UnitConverterService unitConverterService = UnitConverterService(
+      context: context,
+      textEditingController: textEditingController,
+    );
     final brightness = Theme.of(context).brightness;
     return Container(
       margin: EdgeInsets.all(5.w),
@@ -362,17 +365,17 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
               UnitConverterButton(
                 text: '7',
                 buttonType: ButtonType.numbers,
-                onPressed: () {},
+                onPressed: () => unitConverterService.buttonPressed('7'),
               ),
               UnitConverterButton(
                 text: '8',
                 buttonType: ButtonType.numbers,
-                onPressed: () {},
+                onPressed: () => unitConverterService.buttonPressed('8'),
               ),
               UnitConverterButton(
                 text: '9',
                 buttonType: ButtonType.numbers,
-                onPressed: () {},
+                onPressed: () => unitConverterService.buttonPressed('9'),
               ),
             ],
           ),
@@ -382,17 +385,17 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
               UnitConverterButton(
                 text: '4',
                 buttonType: ButtonType.numbers,
-                onPressed: () {},
+                onPressed: () => unitConverterService.buttonPressed('4'),
               ),
               UnitConverterButton(
                 text: '5',
                 buttonType: ButtonType.numbers,
-                onPressed: () {},
+                onPressed: () => unitConverterService.buttonPressed('5'),
               ),
               UnitConverterButton(
                 text: '6',
                 buttonType: ButtonType.numbers,
-                onPressed: () {},
+                onPressed: () => unitConverterService.buttonPressed('6'),
               ),
             ],
           ),
@@ -402,17 +405,17 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
               UnitConverterButton(
                 text: '1',
                 buttonType: ButtonType.numbers,
-                onPressed: () {},
+                onPressed: () => unitConverterService.buttonPressed('1'),
               ),
               UnitConverterButton(
                 text: '2',
                 buttonType: ButtonType.numbers,
-                onPressed: () {},
+                onPressed: () => unitConverterService.buttonPressed('2'),
               ),
               UnitConverterButton(
                 text: '3',
                 buttonType: ButtonType.numbers,
-                onPressed: () {},
+                onPressed: () => unitConverterService.buttonPressed('3'),
               ),
             ],
           ),
@@ -422,17 +425,17 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
               UnitConverterButton(
                 text: '0',
                 buttonType: ButtonType.numbers,
-                onPressed: () {},
+                onPressed: () => unitConverterService.buttonPressed('0'),
               ),
               UnitConverterButton(
                 text: '.',
                 buttonType: ButtonType.numbers,
-                onPressed: () {},
+                onPressed: () => unitConverterService.buttonPressed('.'),
               ),
               UnitConverterButton(
                 text: '<',
                 buttonType: ButtonType.numbers,
-                onPressed: () {},
+                onPressed: () => unitConverterService.buttonPressed('<'),
               ),
             ],
           ),
