@@ -7,6 +7,8 @@ import 'package:main/cubit/rad_to_deg_cubit.dart';
 import 'package:main/cubit/simple_calc_viewer_cubit.dart';
 import 'package:main/cubit/unit_converter_button_cubit.dart';
 import 'package:main/cubit/unit_converter_cubit.dart';
+import 'package:main/cubit/unit_converter_from_to_button_cubit.dart';
+import 'package:main/cubit/unit_converter_from_to_cubit.dart';
 import 'package:main/pages/home_page.dart';
 import 'package:sizer/sizer.dart';
 
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => RadToDegCubit()),
         BlocProvider(create: (context) => UnitConverterCubit()),
         BlocProvider(create: (context) => UnitConverterButtonCubit()),
+        BlocProvider(create: (context) => UnitConverterFromToCubit()),
+        BlocProvider(create: (context) => UnitConverterFromToButtonCubit()),
       ],
       child: Sizer(
         builder: (context, orientation, deviceType) {
@@ -36,6 +40,12 @@ class MyApp extends StatelessWidget {
             context,
           ).changeUnitType(UnitType.area);
           BlocProvider.of<UnitConverterButtonCubit>(context).onChanged('Area');
+          BlocProvider.of<UnitConverterFromToButtonCubit>(
+            context,
+          ).onChanged(['Square Millimeter', 'Square Centimeter']);
+          BlocProvider.of<UnitConverterFromToCubit>(
+            context,
+          ).changeSubUnitType(UnitType.area, 0);
           //BlocProvider.of<GetHomepageBloc>(context).add(GetHomepage());
           return BlocBuilder<ThemeBloc, ThemeData>(
             builder: (context, state) {

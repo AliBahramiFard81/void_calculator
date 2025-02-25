@@ -22,6 +22,7 @@ class _SimpleCalculatorPageState extends State<SimpleCalculatorPage> {
   int textLength = 0;
   @override
   void initState() {
+    print('object');
     textEditingController = TextEditingController();
     scrollController = ScrollController();
     super.initState();

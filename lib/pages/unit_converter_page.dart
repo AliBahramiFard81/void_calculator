@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:main/common/colors.dart';
+import 'package:main/common/converter_units.dart';
 import 'package:main/common/enums.dart';
 import 'package:main/cubit/unit_converter_button_cubit.dart';
 import 'package:main/cubit/unit_converter_cubit.dart';
+import 'package:main/cubit/unit_converter_from_to_button_cubit.dart';
+import 'package:main/cubit/unit_converter_from_to_cubit.dart';
+import 'package:main/services/unit_converter_service.dart';
 import 'package:sizer/sizer.dart';
 
 class UnitConverterPage extends StatefulWidget {
@@ -15,20 +19,6 @@ class UnitConverterPage extends StatefulWidget {
 
 class _UnitConverterPageState extends State<UnitConverterPage> {
   UnitType unitType = UnitType.area;
-  Map<UnitType, String> unitTypeTitle = {
-    UnitType.area: 'Area',
-    UnitType.dataTransferRate: 'Data Transfer Rate',
-    UnitType.digitalStorage: 'Digital Storage',
-    UnitType.energy: 'Energy',
-    UnitType.frequency: 'Frequency',
-    UnitType.length: 'Length',
-    UnitType.mass: 'Mass',
-    UnitType.pressure: 'Pressure',
-    UnitType.speed: 'Speed',
-    UnitType.temperature: 'Temperature',
-    UnitType.time: 'Time',
-    UnitType.volume: 'Volume',
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +45,7 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
                 BlocBuilder<UnitConverterButtonCubit, UnitConverterButtonState>(
                   builder: (context, state) {
                     state as UnitConverterButtonChanged;
+
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -81,7 +72,7 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
                                 value: UnitType.values.elementAt(index),
                                 groupValue: state.unitType,
                                 title: Text(
-                                  unitTypeTitle.entries
+                                  ConverterUnits().unitTypeTitle.entries
                                       .where(
                                         (element) =>
                                             element.key ==
@@ -99,7 +90,7 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
                                   BlocProvider.of<UnitConverterButtonCubit>(
                                     context,
                                   ).onChanged(
-                                    unitTypeTitle.entries
+                                    ConverterUnits().unitTypeTitle.entries
                                         .where(
                                           (element) =>
                                               element.key ==
@@ -108,6 +99,7 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
                                         .first
                                         .value,
                                   );
+                                  unitType = UnitType.values.elementAt(index);
                                   Navigator.pop(context);
                                 },
                               );
@@ -118,6 +110,121 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
                     },
                   );
                 },
+              );
+            },
+          ),
+          SizedBox(height: 5.h),
+          BlocBuilder<
+            UnitConverterFromToButtonCubit,
+            UnitConverterFromToButtonState
+          >(
+            builder: (context, stateText) {
+              stateText as UnitConverterFromToButtonChanged;
+              return Row(
+                children: [
+                  Expanded(
+                    child: MaterialButton(
+                      onPressed: () {
+                        Map<Enum, String> subUnits = UnitConverterService()
+                            .getSubUnits(unitType);
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return BlocBuilder<
+                              UnitConverterFromToCubit,
+                              UnitConverterFromToState
+                            >(
+                              builder: (context, state) {
+                                state as UnitConverterFromToChanged;
+                                return Dialog(
+                                  child: SizedBox(
+                                    height: 70.h,
+                                    child: ListView.builder(
+                                      itemCount: subUnits.values.length,
+                                      itemBuilder: (context, index) {
+                                        return RadioListTile(
+                                          value: subUnits.keys.elementAt(index),
+                                          groupValue: state.unitSubTypeTitle,
+                                          title: Text(
+                                            subUnits.entries
+                                                .where(
+                                                  (element) =>
+                                                      element.key ==
+                                                      subUnits.keys.elementAt(
+                                                        index,
+                                                      ),
+                                                )
+                                                .first
+                                                .value,
+                                          ),
+                                          onChanged: (value) {
+                                            BlocProvider.of<
+                                              UnitConverterFromToCubit
+                                            >(context).changeSubUnitType(
+                                              unitType,
+                                              index,
+                                            );
+                                            BlocProvider.of<
+                                              UnitConverterFromToButtonCubit
+                                            >(context).onChanged([
+                                              subUnits.entries
+                                                  .where(
+                                                    (element) =>
+                                                        element.key ==
+                                                        subUnits.keys.elementAt(
+                                                          index,
+                                                        ),
+                                                  )
+                                                  .first
+                                                  .value,
+                                            ]);
+
+                                            Navigator.pop(context);
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
+                      padding: EdgeInsets.all(3.w),
+                      highlightElevation: 0,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      color:
+                          brightness == Brightness.light
+                              ? lightDisplayColor
+                              : darkDisplayColor,
+                      child: Text(stateText.title.first),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.compare_arrows_rounded),
+                  ),
+                  Expanded(
+                    child: MaterialButton(
+                      onPressed: () {},
+                      padding: EdgeInsets.all(3.w),
+                      elevation: 0,
+                      highlightElevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      color:
+                          brightness == Brightness.light
+                              ? lightDisplayColor
+                              : darkDisplayColor,
+                      child: Text('Meter'),
+                    ),
+                  ),
+                ],
               );
             },
           ),

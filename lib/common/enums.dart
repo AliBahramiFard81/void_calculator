@@ -13,4 +13,29 @@ enum UnitType {
   volume,
 }
 
+enum LengthUnit {
+  millimeter,
+  centimeter,
+  meter,
+  kilometer,
+  inch,
+  foot,
+  yard,
+  mile,
+  nauticalMile,
+}
+
+enum AreaUnit {
+  squareMillimeter,
+  squareCentimeter,
+  squareMeter,
+  squareKilometer,
+  squareInch,
+  squareFoot,
+  squareYard,
+  squareMile,
+  acre,
+  hectare,
+}
+
 enum ButtonType { numbers, functions, equal }

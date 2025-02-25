@@ -24,13 +24,18 @@ class HomePage extends StatelessWidget {
                     ? lightBackgroundColor
                     : darkBackgroundColor,
             appBar: CommonAppbar(title: 'Simple Calculator'),
-            body: Center(
-              child:
+            body: IndexedStack(
+              index:
                   state is GetHomePageLoading
-                      ? const CircularProgressIndicator()
+                      ? 0
                       : state is GetHomePageSuccess
-                      ? SimpleCalculatorPage()
-                      : UnitConverterPage(),
+                      ? 1
+                      : 2,
+              children: [
+                Center(child: CircularProgressIndicator()),
+                SimpleCalculatorPage(),
+                UnitConverterPage(),
+              ],
             ),
           );
         },
